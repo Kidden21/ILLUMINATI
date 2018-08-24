@@ -1,0 +1,9 @@
+- cd Desktop
+- export GOOGLE_APPLICATION_CREDENTIALS="/Users/Kidden/Desktop/fit5120-ddc5582972f2.json
+
+
+
+GIT
+- https://support.cloudways.com/using-git-command-line-ssh/
+- https://git-scm.com/book/en/v2/Git-Basics-Working-with-Remotes
+- https://github.com/codepath/ios_guides/wiki/Using-Git-with-Terminal
