@@ -11,13 +11,29 @@ exports.createNewData = functions.firestore.document('zzchecking/{stationName}')
 	const message = "The current water level is in DANGER level with a water level of ";
 	
 	if (waterLevel >= dangerLevel) {
-		console.log(message + waterLevel);
+		//console.log(message + waterLevel);
+		const payload = {
+			notification: {
+				title: "Danger Level",
+				body: message + waterLevel,
+			}
+		}
+		const db = admin.firestore()
+		const devicesRef = db.collection('devices').where('userId', '==', userId)
+		const devicess = await  devicesRef.get()
+		const tokens = [];
+		devices.forEach(result => {
+			const token = result.data().token;
+			tokens.push( token )
+		})
+		
 	} else if (waterLevel >= warningLevel) {
 		console.log(message + waterLevel);
 	} else if (waterLevel >= alertLevel){
 		console.log(message + waterLevel);
 	}
-	return message + waterLevel;
+	//return message + waterLevel;
+	return admin.messaging().sendToDevice(tokens, payload)
 });
 
 // exports.addMessage = functions.https.onRequest(async (req, res) =>{
