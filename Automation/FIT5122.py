@@ -107,39 +107,55 @@ def get_day():
     item.append(day)
     return item
 
+def menu():
+    print("1. Yes")
+    print("2. No")
+    
 
-chrome_driver_path = "/Users/Kidden/Desktop/ILLUMINATI/Automation/chromedriver"
-os.environ["webdriver.chrome.driver"] = chrome_driver_path
-driver = webdriver.Chrome(chrome_driver_path)
-driver.implicitly_wait(30)
-driver.maximize_window()
-driver.get("http://infobanjir2.water.gov.my/login.cfm")
+while True:
+    try:
+        menu()
+        answer = int(input("You want to start download? If yes, please enter 1. "))
+        if answer == 1:
+            chrome_driver_path = "/Users/Kidden/Desktop/ILLUMINATI/Automation/chromedriver"
+            os.environ["webdriver.chrome.driver"] = chrome_driver_path
+            driver = webdriver.Chrome(chrome_driver_path)
+            driver.implicitly_wait(30)
+            driver.maximize_window()
+            driver.get("http://infobanjir2.water.gov.my/login.cfm")
 
-retry_login()
-location = ['149', '150', '151', '152', '153', '155', '156', '157', '158', '159', '699']
+            retry_login()
+            ##location = ['149', '150', '151', '152', '153', '155', '156', '157', '158', '159', '699']
+            location = ['149']
 
-item_year = get_year()
-item_month = get_month()
-item_day = get_day()
+            item_year = get_year()
+            item_month = get_month()
+            item_day = get_day()
 
-for location_item in location:
-    driver.find_element_by_xpath("//option[@value='"+location_item+"']").click()
-    for value_year in item_year:
-        driver.find_element_by_xpath("//select[@name='startyear']/option[text()='"+value_year+"']").click()
-        for value_month in item_month:
-            driver.find_element_by_xpath("//select[@name='startmonth']/option[text()='"+value_month+"']").click()
-            for value_day in item_day:
-                driver.find_element_by_xpath("//select[@name='startday']/option[text()='"+value_day+"']").click()
-                
-                driver.find_element_by_xpath("//input[@value='Search']").click()
-                
-                excel_button = driver.find_element_by_tag_name("area")
-                
-                try:
-                    excel_button.click()
-                except WebDriverException:
-                    pass
-                driver.find_element_by_xpath("//strong[text()=':Return to Previous Page']").click() 
+            for location_item in location:
+                driver.find_element_by_xpath("//option[@value='"+location_item+"']").click()
+                for value_year in item_year:
+                    driver.find_element_by_xpath("//select[@name='startyear']/option[text()='"+value_year+"']").click()
+                    for value_month in item_month:
+                        driver.find_element_by_xpath("//select[@name='startmonth']/option[text()='"+value_month+"']").click()
+                        for value_day in item_day:
+                            driver.find_element_by_xpath("//select[@name='startday']/option[text()='"+value_day+"']").click()
+                            
+                            driver.find_element_by_xpath("//input[@value='Search']").click()
+                            
+                            excel_button = driver.find_element_by_tag_name("area")
+                            
+                            try:
+                                excel_button.click()
+                            except WebDriverException:
+                                pass
+                            driver.find_element_by_xpath("//strong[text()=':Return to Previous Page']").click()
+        elif answer == 2:
+            break
+        else:
+            print("Please enter a valid command.")
+    except SyntaxError, NameError:
+        print("Please enter a valid command.")
 
 ##day = ['1', '8', '15', '22', '28']
 ##month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
