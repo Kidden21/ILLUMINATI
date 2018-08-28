@@ -1,7 +1,11 @@
 ﻿import os
+import selenium
 from selenium import webdriver
 from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import WebDriverException
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
+from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 
 import firebase_admin
@@ -51,29 +55,40 @@ value = 175 = UluIjok
 value = 176 = UluSlim
 '''
 
-chrome_driver_path = "/Users/Kidden/Downloads/Automation/chromedriver"
+def retry_login():
+    i = True
+    while i:
+        try:
+            current_url = driver.current_url
+            if current_url == "http://infobanjir2.water.gov.my/login.cfm":
+                insert_info()
+                sign_in()
+                driver.get("http://infobanjir2.water.gov.my/db/data_query.cfm?state=PRK")
+            else:
+                i = False
+        except selenium.common.exceptions.UnexpectedAlertPresentException:
+            alert = driver.switch_to.alert
+            alert.accept()
+
+def insert_info():
+    search_field_username = driver.find_element_by_name("name")
+    search_field_username.send_keys("Kidden21")
+
+    search_field_pass = driver.find_element_by_name("pass")
+    search_field_pass.send_keys("Kidden21881")
+
+def sign_in():
+    driver.find_element_by_name("hantar").click()
+
+chrome_driver_path = "/Users/Kidden/Desktop/ILLUMINATI/Automation/chromedriver"
 os.environ["webdriver.chrome.driver"] = chrome_driver_path
 driver = webdriver.Chrome(chrome_driver_path)
 driver.implicitly_wait(30)
 driver.maximize_window()
 driver.get("http://infobanjir2.water.gov.my/login.cfm")
 
-search_field_username = driver.find_element_by_name("name")
-search_field_username.send_keys("Kidden21")
-
-search_field_pass = driver.find_element_by_name("pass")
-search_field_pass.send_keys("Kidden21881")
-
-driver.find_element_by_name("hantar").click()
-
-driver.get("http://infobanjir2.water.gov.my/db/data_query.cfm?state=PRK")
-
-#'149', '150', '151', '152', '153', '154', '693', '155', '156', '157',
-#'158', '159', '692', '700', '160', '694', '699', '690', '161', '162',
-#'695', '691', '163', '673', '165', '166', '696', '167', '168', '698',
-#'701', '697', '175', '176'
-#'169', '171'，'174'，
-location = ['174']
+retry_login()
+location = ['149', '150', '151', '152', '153', '155', '156', '157', '158', '159', '699']
 
 #day = ['1', '8', '15', '22', '28']
 #month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
