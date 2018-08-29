@@ -34,7 +34,7 @@ def check_duplicate(datetime, item_list):
         
     
 
-cred = credentials.Certificate("/Users/Kidden/Desktop/fit5120-ddc5582972f2.json")
+cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
 firebase_admin.initialize_app(cred, {
     "projectId": "fit5120-fb6c5",
     })
@@ -78,26 +78,22 @@ for folder in os.listdir("/Users/Kidden/Desktop/PublicInfoBanjir")[1:]:
                         counter += 1
                         data.append(datetime)
                         
-                '''
-                data.append({
-                    "Station Name": cols[1].get_text(),
-                    "Date": cols[2].get_text(),
-                    "Time": cols[3].get_text(),
-                    "Water Level": cols[4].get_text(),
-                    "RF Level (month)": cols[5].get_text(),
-                    "RF Level (daily)": cols[6].get_text()
-                    })
-                '''
-            #print(data[1])
-
-
-
-            #for item in data:
-               #doc_ref = db.collection(folder).document(year)
-                #doc_ref.set(data)
-
-
 '''
+data.append({
+"Station Name": cols[1].get_text(),
+"Date": cols[2].get_text(),
+"Time": cols[3].get_text(),
+"Water Level": cols[4].get_text(),
+"RF Level (month)": cols[5].get_text(),
+"RF Level (daily)": cols[6].get_text()
+})
+
+#print(data[1])
+
+#for item in data:
+#doc_ref = db.collection(folder).document(year)
+#doc_ref.set(data)
+
 html_file = codecs.open("parit.html", "r")
 soup = BeautifulSoup(html_file, "lxml")
 table = soup.find("table")
