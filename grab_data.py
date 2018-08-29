@@ -8,9 +8,6 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from datetime import datetime, date, time
 from ast import literal_eval
-import google
-from google.appengine.api import urlfetch
-urlfetch.set_default_fetch_deadline(20000)
 
 def grab_info(item_list):
     if item_list == None:
@@ -21,15 +18,23 @@ def grab_info(item_list):
     water_level = item_list["Water Level"]
     return rf_level_monthly, rf_level_daily, water_level
 
-cred = credentials.Certificate("/Users/Kidden/Desktop/fit5120-ddc5582972f2.json")
+cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
 firebase_admin.initialize_app(cred, {
     "projectId": "fit5120-fb6c5",
     })
 
 db = firestore.client()
 
-docs = db.collection(u"BukitMerah").get()
-
+docs = db.collection(u"zzchecking").where(u"Date", u"==", u"08/01/2018").get()
+if docs == None:
+    print("Yes")
+else:
+    print("No")
+print(docs)
+for doc in docs:
+    data = doc.to_dict()
+    print(data)
+'''
 try:
     for doc in docs:
         data = doc.to_dict()
@@ -53,7 +58,7 @@ try:
                 })
 except google.appengine.api.urlfetch_errors.DeadlineExceededError:
     pass
-
+'''
         
         
         

@@ -31,16 +31,12 @@ def check_duplicate(datetime, item_list):
             return True
     return False
         
-        
-    
-
 cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
 firebase_admin.initialize_app(cred, {
     "projectId": "fit5120-fb6c5",
     })
 
 db = firestore.client()
-
 
 for folder in os.listdir("/Users/Kidden/Desktop/PublicInfoBanjir")[1:]:
     for year in os.listdir(r"/Users/Kidden/Desktop/PublicInfoBanjir/" + folder)[1:]:
@@ -77,8 +73,39 @@ for folder in os.listdir("/Users/Kidden/Desktop/PublicInfoBanjir")[1:]:
                             })
                         counter += 1
                         data.append(datetime)
-                        
+
+
 '''
+
+for filename in os.listdir("/Users/Kidden/Desktop/PublicInfoBanjir")[1:]:
+    html_file = codecs.open(r"/Users/Kidden/Desktop/PublicInfoBanjir/" + filename, "r")
+    soup = BeautifulSoup(html_file, "lxml")
+    table = soup.find("table")
+    rows = table.find_all("tr")[1:]
+
+    for row in rows:
+        cols = row.find_all("td")
+
+        station_name = cols[1].get_text()
+        station_date_time = str_to_date(cols[2].get_text(), cols[3].get_text())
+
+        docs = db.collection(station_name).get()
+        for doc in docs:
+            data = doc.to_dict()
+            if data["Date"] != station_date_time:
+                doc_ref = db.collection(station_name).add({
+                    "Station Name": station_name,
+                    "Date": station_date_time,
+                    "Info": {
+                        "Water Level": int(cols[4].get_text()),
+                        "RF Level": {
+                            "Monthly": int(cols[5].get_text()),
+                            "Daily": int(cols[6].get_text())
+                            }
+                        }
+                    })
+
+
 data.append({
 "Station Name": cols[1].get_text(),
 "Date": cols[2].get_text(),

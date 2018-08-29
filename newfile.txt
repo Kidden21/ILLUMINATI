@@ -1,5 +1,17 @@
 - cd Desktop
-- export GOOGLE_APPLICATION_CREDENTIALS="/Users/Kidden/Desktop/fit5120-ddc5582972f2.json
+- export GOOGLE_APPLICATION_CREDENTIALS="/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json
+
+- cd Desktop
+- cd ILLUMINATI
+- python read_file.py
+
+- Deploy Cloud Functions
+
+- Git
+
+- cd Desktop
+- cd ILLUMINATI
+- python compare.py
 
 
 
