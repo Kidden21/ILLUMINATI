@@ -38,12 +38,12 @@ firebase_admin.initialize_app(cred, {
 
 db = firestore.client()
 
-for folder in os.listdir("/Users/Kidden/Desktop/PublicInfoBanjir")[1:]:
-    for year in os.listdir(r"/Users/Kidden/Desktop/PublicInfoBanjir/" + folder)[1:]:
+for folder in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir")[1:]:
+    for year in os.listdir(r"/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder)[1:]:
         counter = 1
         data = []
-        for filename in os.listdir(r"/Users/Kidden/Desktop/PublicInfoBanjir/" + folder + "/" + year)[1:]:
-            html_file = codecs.open(r"/Users/Kidden/Desktop/PublicInfoBanjir/" + folder + "/" + year + "/" + filename, "r")
+        for filename in os.listdir(r"/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder + "/" + year)[1:]:
+            html_file = codecs.open(r"/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder + "/" + year + "/" + filename, "r")
             soup = BeautifulSoup(html_file, "lxml")
             table = soup.find("table")
             rows = table.find_all("tr")[1:]

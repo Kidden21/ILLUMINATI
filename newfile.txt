@@ -6,6 +6,7 @@
 - python read_file.py
 
 - Deploy Cloud Functions
+- firebase deploy --only functions
 
 - Git
 

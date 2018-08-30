@@ -36,8 +36,8 @@ alert_system_list = [
                      ]
 
 
-for item in os.listdir("/Users/Kidden/Desktop/LatestData")[1:]:
-    html_file = codecs.open(r"/Users/Kidden/Desktop/LatestData/" + item, "r")
+for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
+    html_file = codecs.open(r"/Users/Kidden/Desktop/ILLUMINATI/LatestData/" + item, "r")
     soup = BeautifulSoup(html_file, "lxml")
     table = soup.find("table")
     rows = table.find_all("tr")[1:]
