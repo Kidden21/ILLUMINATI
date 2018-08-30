@@ -1,5 +1,6 @@
 - cd Desktop
 - export GOOGLE_APPLICATION_CREDENTIALS="/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json
+- export GOOGLE_APPLICATION_CREDENTIALS="/Users/Kidden/Desktop/ILLUMINATI/flood-aid-application-ad8dc-ea95d186ef46.json
 
 - cd Desktop
 - cd ILLUMINATI

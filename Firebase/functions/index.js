@@ -16,45 +16,54 @@ exports.createNewData = functions.firestore.document('zzchecking/{stationName}')
 	const payload = {
 		notification: {
 			title: "Danger Level",
-			body: "The current water level is in DANGER level with a water level of " + waterLevel
+			body: "The current water level is in DANGER level with a water level of "
 		}
 	};
 	
-	const db = admin.firestore();
-	const devicesRef = db.collection('devices').where("userId", "==", userId)
+	if (waterLevel >= dangerLevel) {
+		//console.log(waterLevel);
+		payload = {
+		notification: {
+			title: "Danger Level",
+			body: "The current water level is in DANGER level with a water level of " + waterLevel
+		}
+	};
+	} else if (waterLevel >= warningLevel) {
+		//console.log(waterLevel);
+		payload = {
+		notification: {
+			title: "Danger Level",
+			body: "The current water level is in WARNING level with a water level of " + waterLevel
+		}
+	};
+	} else if (waterLevel >= alertLevel){
+		//console.log(waterLevel);
+		payload = {
+		notification: {
+			title: "Danger Level",
+			body: "The current water level is in ALERT level with a water level of " + waterLevel
+		}
+	};
+	}
 	
-	const devices = await devicesRef.get();
+	// const db = admin.firestore();
+	// const devicesRef = db.collection('devices').where("userId", "==", "testUser")
+	//
+	// const devices = await devicesRef.get();
+	//
+	// const tokens = [];
+	//
+	// devices.forEach(result => {
+	// 	const token = result.data().token;
+	// 	tokens.push( token )
+	// });
+	//const tokenjaz = "ehfk7Y8Zorc:APA91bG9XeSK3o3x-kaWjfhxiXvzpTYnlQr_lKvwCzTk-artz0ZHEfXL8H4Eak71RVXJeCGI7zW2Ec5HjrsHYxTCTHhU9M1TA6oJ7SCbIjQqwKvknlbCG6KflR4s7SqMaT8tchNIYf5g";
+	const tokenben = "fOfmAeRmqlU:APA91bEVexKBQxJm1gIJsY9f37tPYDZaXd_9lbcYlaeYnbeucCcXFNrjuvix85bFzlTSyLQLnRYs7qHsWop6DsZcvCX1eZCaWg975nV0ECs5rcSh3eBnYvNZN_dKAPomzgb81mRTGrrj";
 	
-	const tokens = [];
+	//console.log("Sent Successfully")
+	return admin.messaging().sendToDevice(tokenben, payload);
 	
-	devices.forEach(result => {
-		const token = result.data().token;
-		tokens.push( token )
-	});
-	
-	console.log("Sent Successfully")
-	return admin.messaging().sendToDevice(tokens, payload);
-	
-	
-	// if (waterLevel >= dangerLevel) {
-	// 	console.log(waterLevel);
-	// } else if (waterLevel >= warningLevel) {
-	// 	console.log(waterLevel);
-	// } else if (waterLevel >= alertLevel){
-	// 	console.log(waterLevel);
-	// }
-	// //return message + waterLevel;
-	// return admin.messaging().sendToTopic("pushNotifications", payload)
 });
-
-// Create and Deploy Your First Cloud Functions
-// https://firebase.google.com/docs/functions/write-firebase-functions
-
-// exports.helloWorld = functions.https.onRequest((request, response) => {
-// 	console.log("hello")
-// 	response.send("Hello from Kidden!");
-// });
-
 
 // var serviceAccount = require('/Users/Kidden/Desktop/fit5120-ddc5582972f2.json');
 // admin.initializeApp({

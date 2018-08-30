@@ -9,15 +9,17 @@ from firebase_admin import firestore
 from datetime import datetime, date, time
 from ast import literal_eval
 
-cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
+#cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
+#"projectId": "fit5120-fb6c5"
+cred = credentials.Certificate("/Users/Kidden/Desktop/flood-aid-application-ad8dc-ea95d186ef46.json")
 firebase_admin.initialize_app(cred, {
-    "projectId": "fit5120-fb6c5",
+    "projectId": "flood-aid-application-ad8dc",
     })
 
 db = firestore.client()
 
 alert_system_list = [
-                     {"StationName": "SungaiSlim", "AlertLevel": 2700, "WarningLevel": 2730,"DangerLevel": 2800},
+                     {"StationName": "SungaiSlim", "AlertLevel": 2310, "WarningLevel": 2350,"DangerLevel": 2390},
                      {"StationName": "PasangApi_BaganDatok", "AlertLevel": 300, "WarningLevel": 330,"DangerLevel": 400},
                      {"StationName": "TasikBanding", "AlertLevel": 24700, "WarningLevel": 24769,"DangerLevel": 24838},
                      {"StationName": "BukitMerah", "AlertLevel": 900, "WarningLevel": 904,"DangerLevel": 914},
