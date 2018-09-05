@@ -13,55 +13,54 @@ exports.createNewData = functions.firestore.document('zzchecking/{stationName}')
 	const dangerLevel = newValue.Alert_System.Danger_Level;
 	//const message = locationValue + ", " + dateValue + ", " + timeValue + ": The current water level is in DANGER level with a water level of ";
 	
-	const payload = {
-		notification: {
-			title: "Danger Level",
-			body: "The current water level is in DANGER level with a water level of "
-		}
-	};
+	// const payload = {
+	// 	notification: {
+	// 		title: "Danger Level",
+	// 		body: "The current water level is in DANGER level with a water level of "
+	// 	}
+	// };
 	
 	if (waterLevel >= dangerLevel) {
 		//console.log(waterLevel);
-		payload = {
+		const payload = {
 		notification: {
 			title: "Danger Level",
-			body: "The current water level is in DANGER level with a water level of " + waterLevel
+			body: "The current water level is in level 3 (DANGER) with a water level of " + waterLevel
 		}
 	};
 	} else if (waterLevel >= warningLevel) {
 		//console.log(waterLevel);
-		payload = {
+		const payload = {
 		notification: {
 			title: "Danger Level",
-			body: "The current water level is in WARNING level with a water level of " + waterLevel
+			body: "The current water level is in level 2 (WARNING) with a water level of " + waterLevel
 		}
 	};
 	} else if (waterLevel >= alertLevel){
 		//console.log(waterLevel);
-		payload = {
+		const payload = {
 		notification: {
 			title: "Danger Level",
-			body: "The current water level is in ALERT level with a water level of " + waterLevel
+			body: "The current water level is in level 1 (ALERT) with a water level of " + waterLevel
 		}
 	};
 	}
 	
 	// const db = admin.firestore();
-	// const devicesRef = db.collection('devices').where("userId", "==", "testUser")
+	// const devicesRef = db.collection('devices').where("userId", "==", "testUser");
 	//
-	// const devices = await devicesRef.get();
-	//
+	// const devices = devicesRef.get();
+	
 	// const tokens = [];
-	//
-	// devices.forEach(result => {
+
+	// devices.forEach(function (result) {
 	// 	const token = result.data().token;
 	// 	tokens.push( token )
 	// });
-	//const tokenjaz = "ehfk7Y8Zorc:APA91bG9XeSK3o3x-kaWjfhxiXvzpTYnlQr_lKvwCzTk-artz0ZHEfXL8H4Eak71RVXJeCGI7zW2Ec5HjrsHYxTCTHhU9M1TA6oJ7SCbIjQqwKvknlbCG6KflR4s7SqMaT8tchNIYf5g";
-	const tokenben = "fOfmAeRmqlU:APA91bEVexKBQxJm1gIJsY9f37tPYDZaXd_9lbcYlaeYnbeucCcXFNrjuvix85bFzlTSyLQLnRYs7qHsWop6DsZcvCX1eZCaWg975nV0ECs5rcSh3eBnYvNZN_dKAPomzgb81mRTGrrj";
-	
-	//console.log("Sent Successfully")
-	return admin.messaging().sendToDevice(tokenben, payload);
+
+	const newtoken = "f_Jj5XQP9x4:APA91bE9HMkm7qeGMdEAv59RQpYc28qSAzHhMPhx8nh2_6rLSI1Z-6Q6EiEr3iDmkivKlqqHAXJMrR4sQLOzGVu4Re5wuzf3w7ctaUjsRt4oS_VOJAZsGDcChPsznAGeSgeyASBj7yBU"
+
+	return admin.messaging().sendToDevice(newtoken, payload);
 	
 });
 

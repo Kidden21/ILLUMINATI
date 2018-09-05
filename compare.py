@@ -20,7 +20,7 @@ firebase_admin.initialize_app(cred, {
 db = firestore.client()
 
 alert_system_list = [
-                     {"StationName": "SungaiSlim", "AlertLevel": 2700, "WarningLevel": 2730,"DangerLevel": 2800},
+                     {"StationName": "SungaiSlim", "AlertLevel": 2300, "WarningLevel": 2350,"DangerLevel": 2400},
                      {"StationName": "PasangApi_BaganDatok", "AlertLevel": 300, "WarningLevel": 330,"DangerLevel": 400},
                      {"StationName": "TasikBanding", "AlertLevel": 24700, "WarningLevel": 24769,"DangerLevel": 24838},
                      {"StationName": "BukitMerah", "AlertLevel": 900, "WarningLevel": 904,"DangerLevel": 914},
