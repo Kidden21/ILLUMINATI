@@ -8,6 +8,7 @@ from firebase_admin import credentials
 from firebase_admin import firestore
 from datetime import datetime, date, time
 from ast import literal_eval
+from pyfcm import FCMNotification
 
 def grab_info(item_list):
     if item_list == None:
@@ -24,16 +25,12 @@ firebase_admin.initialize_app(cred, {
     })
 
 db = firestore.client()
-
-docs = db.collection(u"zzchecking").where(u"Date", u"==", u"08/01/2018").get()
-if docs == None:
-    print("Yes")
-else:
-    print("No")
-print(docs)
+docs = db.collection(u"devices").where(u"userId", u"==", u"testUser").get()
+token = []
 for doc in docs:
     data = doc.to_dict()
-    print(data)
+    token.append(data["token"])
+    
 '''
 try:
     for doc in docs:
@@ -59,22 +56,7 @@ try:
 except google.appengine.api.urlfetch_errors.DeadlineExceededError:
     pass
 '''
-        
-        
-        
-    #print("Rainfall Level Monthly: " + str(value1))
-    #print("Rainfall Level Daily: " + str(value2))
-    #print("Water Level Daily: " + str(value3))
-    #print("Station Name: " + str(data["Station Name"]))
-    #print("Datetime: " + str(data["Date"]))
 
     
-    
 
-##doc = doc_ref.get()
-##data = doc.to_dict()
-##item_list = []
-##for key, value in data.iteritems():
-##    temp = [key, value]
-##    item_list.append(temp)
 

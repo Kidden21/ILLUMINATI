@@ -10,9 +10,6 @@ from datetime import datetime, date, time
 from ast import literal_eval
 
 cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
-#"projectId": "fit5120-fb6c5"
-#"projectId": "flood-aid-application-ad8dc"
-#cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/flood-aid-application-ad8dc-ea95d186ef46.json")
 firebase_admin.initialize_app(cred, {
     "projectId": "fit5120-fb6c5",
     })
