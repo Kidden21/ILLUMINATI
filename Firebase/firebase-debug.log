@@ -1,0 +1,22 @@
+[debug] [2018-09-06T11:07:27.500Z] ----------------------------------------------------------------------
+[debug] [2018-09-06T11:07:27.516Z] Command:       /Users/Kidden/.nvm/versions/node/v8.1.1/bin/node /Users/Kidden/.nvm/versions/node/v8.1.1/bin/firebase deploy --only functions
+[debug] [2018-09-06T11:07:27.516Z] CLI Version:   4.2.1
+[debug] [2018-09-06T11:07:27.516Z] Platform:      darwin
+[debug] [2018-09-06T11:07:27.516Z] Node Version:  v8.1.1
+[debug] [2018-09-06T11:07:27.517Z] Time:          Thu Sep 06 2018 19:07:27 GMT+0800 (+08)
+[debug] [2018-09-06T11:07:27.517Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2018-09-06T11:07:27.540Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2018-09-06T11:07:27.540Z] > authorizing via signed-in user
+[debug] [2018-09-06T11:07:27.542Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2018-09-06T11:07:27.542Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token  
+
+[debug] [2018-09-06T11:07:27.713Z] <<< HTTP RESPONSE 200
+[debug] [2018-09-06T11:07:27.732Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/fit5120-fb6c5  
+ 
+[debug] [2018-09-06T11:07:28.700Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Deploying to 'fit5120-fb6c5'...
+[info] 
+[info] i  deploying functions
+[info] Running command: npm --prefix "functions" run lint

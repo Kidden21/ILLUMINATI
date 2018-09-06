@@ -35,9 +35,9 @@ exports.createNewData = functions.firestore.document('zzchecking/{stationName}')
 		}
 	};
 	
-	const db = admin.firestore();
-	const devicesRef = db.collection('devices').where("userId", "==", "testUser").get();
-
+	// const db = admin.firestore();
+	// const devicesRef = db.collection('devices').where("userId", "==", "testUser").get();
+	//
 	// const tokens = [];
 	// var token;
 	// devicesRef.forEach(function (result) {
@@ -45,8 +45,8 @@ exports.createNewData = functions.firestore.document('zzchecking/{stationName}')
 	// 	tokens.push( token )
 	// });
 
-	// const newtoken = "f_Jj5XQP9x4:APA91bE9HMkm7qeGMdEAv59RQpYc28qSAzHhMPhx8nh2_6rLSI1Z-6Q6EiEr3iDmkivKlqqHAXJMrR4sQLOzGVu4Re5wuzf3w7ctaUjsRt4oS_VOJAZsGDcChPsznAGeSgeyASBj7yBU"
+	const newtoken = "f_Jj5XQP9x4:APA91bE9HMkm7qeGMdEAv59RQpYc28qSAzHhMPhx8nh2_6rLSI1Z-6Q6EiEr3iDmkivKlqqHAXJMrR4sQLOzGVu4Re5wuzf3w7ctaUjsRt4oS_VOJAZsGDcChPsznAGeSgeyASBj7yBU"
 
-	return admin.messaging().sendToDevice(token, payload);
+	return admin.messaging().sendToDevice(newtoken, payload);
 	
 });
