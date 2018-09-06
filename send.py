@@ -27,7 +27,7 @@ push_service = FCMNotification(api_key="AAAASPxj3ek:APA91bHtLxwS4_xgg1dekD-X0-3y
 tokens = grab_token()
 
 alert_system_list = [
-                     {"StationName": "SungaiSlim", "AlertLevel": 2700, "WarningLevel": 2730,"DangerLevel": 2400},
+                     {"StationName": "SungaiSlim", "AlertLevel": 2700, "WarningLevel": 2730,"DangerLevel": 2800},
                      {"StationName": "PasangApi_BaganDatok", "AlertLevel": 300, "WarningLevel": 330,"DangerLevel": 400},
                      {"StationName": "TasikBanding", "AlertLevel": 24700, "WarningLevel": 24769,"DangerLevel": 24838},
                      {"StationName": "BukitMerah", "AlertLevel": 900, "WarningLevel": 904,"DangerLevel": 914},
@@ -56,7 +56,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
         cols = row.find_all("td")
 
         station_name = cols[1].get_text()
-        print(station_name)
+
         if before:
             for i in range(len(alert_system_list)):
                 if alert_system_list[i]["StationName"] == station_name:
