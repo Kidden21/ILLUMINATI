@@ -42,7 +42,33 @@ alert_system_list = [
                      {"StationName": "B14BatuKurau", "AlertLevel": 2400, "WarningLevel": 2470, "DangerLevel": 2540},
                      {"StationName": "KampungGajah", "AlertLevel": 650, "WarningLevel": 665,"DangerLevel": 700},
                      {"StationName": "Parit", "AlertLevel": 1980, "WarningLevel": 2070,"DangerLevel": 2160},
-                     {"StationName": "TelukSena", "AlertLevel": 1100, "WarningLevel": 1190,"DangerLevel": 1280}
+                     {"StationName": "TelukSena", "AlertLevel": 1100, "WarningLevel": 1190,"DangerLevel": 1280},
+                     {"StationName": "BaganDatuk", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "BukitLarut", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "ChangkatJong", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "Emp.Cenderoh", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "FeldaIjok", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "GuaTempurung", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "KampongLalang", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "KelianGunungIjok", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "KgPantaiBesar", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "KgSahom", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "KgSempeneh", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "KgSgRambutan", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "KualaKenderong", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "LadangSeldings", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "LojiAirSgBayor", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "PulauPangkor", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "RumahJPSAlorPongsu", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "Samagagah", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "Selama", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "SgArakgBatu20", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "SgKurauPondokTanjung", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "SgSelamaGuaPetai", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "SungaiBil", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "UluSlim", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     v
+                     
                      ]
 
 for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
@@ -65,6 +91,9 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
                     danger = alert_system_list[i]["DangerLevel"]
                     before = False
                     pass
+
+##        if int(cols[4].get_text()) == None:
+##            break
 
         if int(cols[4].get_text()) >= danger:
             for token in tokens:
@@ -93,5 +122,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
 ##            message_title = str(station_name) + ": Alert Level"
 ##            message_body = "The current water level is in level 1 (ALERT) with a water level of " + str(cols[4].get_text())
 ##            result = push_service.notify_multiple_device(registration_id=tokens, message_title=message_title, message_body=message_body)
+##        for token in tokens:
+##            result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
 
 
