@@ -62,7 +62,9 @@ for folder in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir")[1:
                         doc_ref = db.collection(folder).document(year + "-" + str(counter))
                         doc_ref.set({
                             "Station_Name": cols[1].get_text(),
-                            "Date": datetime,
+                            "Datetime": datetime,
+                            "Date": cols[2].get_text(),
+                            "Time": cols[3].get_text(),
                             "Info":{
                                 "Water_Level": int(cols[4].get_text()),
                                 "RF_Level": {
