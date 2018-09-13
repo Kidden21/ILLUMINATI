@@ -7,6 +7,22 @@ import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from pyfcm import FCMNotification
+import math
+
+def degreetoRadian(degrees):
+    return degrees * math.pi / 180
+
+def distance(x1, y1, x2, y2):
+    earthradiusKM = 6371
+    x = degreetoRadian(x1-x2)
+    y = degreetoRadian(y1-y2)
+
+    X = degreetoRadian(x)
+    Y = degreetoRadian(y)
+
+    a = math.sin(x/2) * math.sin(x/2) + math.sin(y/2) * math.sin(y/2) * math.cos(X) * math.cos(Y)
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
+    return earthradiusKM * c
 
 def grab_token():
     db = firestore.client()
@@ -27,46 +43,46 @@ push_service = FCMNotification(api_key="AAAASPxj3ek:APA91bHtLxwS4_xgg1dekD-X0-3y
 tokens = grab_token()
 
 alert_system_list = [
-                     {"StationName": "SungaiSlim", "AlertLevel": 2700, "WarningLevel": 2730,"DangerLevel": 2800},
-                     {"StationName": "PasangApi_BaganDatok", "AlertLevel": 300, "WarningLevel": 330,"DangerLevel": 400},
-                     {"StationName": "TasikBanding", "AlertLevel": 24700, "WarningLevel": 24769,"DangerLevel": 24838},
-                     {"StationName": "BukitMerah", "AlertLevel": 900, "WarningLevel": 904,"DangerLevel": 914},
-                     {"StationName": "KualaPari", "AlertLevel": 3500, "WarningLevel": 3530,"DangerLevel": 3600},
-                     {"StationName": "TanjungRambutan", "AlertLevel": 6650, "WarningLevel": 6715,"DangerLevel": 6780},
-                     {"StationName": "TanjungTualang", "AlertLevel": 1300, "WarningLevel": 1375,"DangerLevel": 1450},
-                     {"StationName": "JambatanIskandar", "AlertLevel": 5400, "WarningLevel": 5424,"DangerLevel": 5480},
-                     {"StationName": "KampungLintang", "AlertLevel": 3500, "WarningLevel": 3565,"DangerLevel": 3630},
-                     {"StationName": "PondokTanjong", "AlertLevel": 1500, "WarningLevel": 1524,"DangerLevel": 1580},
-                     {"StationName": "UluIjok", "AlertLevel": 3500, "WarningLevel": 3530,"DangerLevel": 3550},
-                     {"StationName": "KgSgKuning", "AlertLevel": 1950, "WarningLevel": 2025,"DangerLevel": 2100},
-                     {"StationName": "B14BatuKurau", "AlertLevel": 2400, "WarningLevel": 2470, "DangerLevel": 2540},
-                     {"StationName": "KampungGajah", "AlertLevel": 650, "WarningLevel": 665,"DangerLevel": 700},
-                     {"StationName": "Parit", "AlertLevel": 1980, "WarningLevel": 2070,"DangerLevel": 2160},
-                     {"StationName": "TelukSena", "AlertLevel": 1100, "WarningLevel": 1190,"DangerLevel": 1280},
-                     {"StationName": "BaganDatuk", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "BukitLarut", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "ChangkatJong", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "Emp.Cenderoh", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "FeldaIjok", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "GuaTempurung", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "KampongLalang", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "KelianGunungIjok", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "KgPantaiBesar", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "KgSahom", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "KgSempeneh", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "KgSgRambutan", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "KualaKenderong", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "LadangSeldings", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "LojiAirSgBayor", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "PulauPangkor", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "RumahJPSAlorPongsu", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "Samagagah", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "Selama", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "SgArakgBatu20", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "SgKurauPondokTanjung", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "SgSelamaGuaPetai", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "SungaiBil", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
-                     {"StationName": "UluSlim", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None},
+                     {"StationName": "SungaiSlim", "AlertLevel": 2700, "WarningLevel": 2730,"DangerLevel": 2800, "Latitude": 3.826389, "Longitude": 101.411111},
+                     {"StationName": "PasangApi_BaganDatok", "AlertLevel": 300, "WarningLevel": 330,"DangerLevel": 400, "Latitude": 3.988158, "Longitude": 100.765469},
+                     {"StationName": "TasikBanding", "AlertLevel": 24700, "WarningLevel": 24769,"DangerLevel": 24838, "Latitude": 5.550586, "Longitude": 101.352733},
+                     {"StationName": "BukitMerah", "AlertLevel": 900, "WarningLevel": 904,"DangerLevel": 914, "Latitude": 5.0183, "Longitude": 100.652778},
+                     {"StationName": "KualaPari", "AlertLevel": 3500, "WarningLevel": 3530,"DangerLevel": 3600, "Latitude": 4.57804, "Longitude": 101.06891},
+                     {"StationName": "TanjungRambutan", "AlertLevel": 6650, "WarningLevel": 6715,"DangerLevel": 6780, "Latitude": 4.668042, "Longitude": 101.157006},
+                     {"StationName": "TanjungTualang", "AlertLevel": 1300, "WarningLevel": 1375,"DangerLevel": 1450, "Latitude": 4.322222, "Longitude": 101.075},
+                     {"StationName": "JambatanIskandar", "AlertLevel": 5400, "WarningLevel": 5424,"DangerLevel": 5480, "Latitude": 4.8194, "Longitude": 100.965278},
+                     {"StationName": "KampungLintang", "AlertLevel": 3500, "WarningLevel": 3565,"DangerLevel": 3630, "Latitude": 4.9375, "Longitude": 101.102778},
+                     {"StationName": "PondokTanjong", "AlertLevel": 1500, "WarningLevel": 1524,"DangerLevel": 1580, "Latitude": 5.01185, "Longitude": 100.73116},
+                     {"StationName": "UluIjok", "AlertLevel": 3500, "WarningLevel": 3530,"DangerLevel": 3550, "Latitude": 5.120606, "Longitude": 100.804141},
+                     {"StationName": "KgSgKuning", "AlertLevel": 1950, "WarningLevel": 2025,"DangerLevel": 2100, "Latitude": None, "Longitude": None},
+                     {"StationName": "B14BatuKurau", "AlertLevel": 2400, "WarningLevel": 2470, "DangerLevel": 2540, "Latitude": 4.977639, "Longitude": 100.779222},
+                     {"StationName": "KampungGajah", "AlertLevel": 650, "WarningLevel": 665,"DangerLevel": 700, "Latitude": 4.1796, "Longitude": 100.929925},
+                     {"StationName": "Parit", "AlertLevel": 1980, "WarningLevel": 2070,"DangerLevel": 2160, "Latitude": 4.4722, "Longitude": 100.9046},
+                     {"StationName": "TelukSena", "AlertLevel": 1100, "WarningLevel": 1190,"DangerLevel": 1280, "Latitude": 4.2559, "Longitude": 100.89938},
+                     {"StationName": "BaganDatuk", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": None, "Longitude": None},
+                     {"StationName": "BukitLarut", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 4.850194, "Longitude": 100.783528},
+                     {"StationName": "ChangkatJong", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": None, "Longitude": None},
+                     {"StationName": "Emp.Cenderoh", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": None, "Longitude": None},
+                     {"StationName": "FeldaIjok", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.163611, "Longitude": 100.7675},
+                     {"StationName": "GuaTempurung", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 4.434278, "Longitude": 101.190831},
+                     {"StationName": "KampongLalang", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.604167, "Longitude": 101.080556},
+                     {"StationName": "KelianGunungIjok", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.149722, "Longitude": 100.885},
+                     {"StationName": "KgPantaiBesar", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.086666, "Longitude": 100.859722},
+                     {"StationName": "KgSahom", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 4.385847, "Longitude": 101.21458},
+                     {"StationName": "KgSempeneh", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 4.925277, "Longitude": 100.828055},
+                     {"StationName": "KgSgRambutan", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.275188, "Longitude": 100.780361},
+                     {"StationName": "KualaKenderong", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.416667, "Longitude": 101.154167},
+                     {"StationName": "LadangSeldings", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.247222, "Longitude": 100.729722},
+                     {"StationName": "LojiAirSgBayor", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.258888, "Longitude": 100.831666},
+                     {"StationName": "PulauPangkor", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 4.246305, "Longitude": 100.55425},
+                     {"StationName": "RumahJPSAlorPongsu", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.046388, "Longitude": 100.590555},
+                     {"StationName": "Samagagah", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.066667, "Longitude": 100.536944},
+                     {"StationName": "Selama", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.216667, "Longitude": 100.6833},
+                     {"StationName": "SgArakgBatu20", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.0325, "Longitude": 100.79},
+                     {"StationName": "SgKurauPondokTanjung", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": None, "Longitude": None},
+                     {"StationName": "SgSelamaGuaPetai", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 5.237222, "Longitude": 100.72},
+                     {"StationName": "SungaiBil", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 3.835331, "Longitude": 101.4941},
+                     {"StationName": "UluSlim", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 3.865642, "Longitude": 101.448064},
                      v
                      
                      ]

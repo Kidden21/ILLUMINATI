@@ -50,3 +50,5 @@ exports.createNewData = functions.firestore.document('zzchecking/{stationName}')
 	return admin.messaging().sendToDevice(newtoken, payload);
 	
 });
+
+

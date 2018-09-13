@@ -61,11 +61,11 @@ for folder in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir")[1:
                     if not duplicate:
                         doc_ref = db.collection(folder).document(year + "-" + str(counter))
                         doc_ref.set({
-                            "Station Name": cols[1].get_text(),
+                            "Station_Name": cols[1].get_text(),
                             "Date": datetime,
                             "Info":{
-                                "Water Level": int(cols[4].get_text()),
-                                "RF Level": {
+                                "Water_Level": int(cols[4].get_text()),
+                                "RF_Level": {
                                     "Monthly": int(cols[5].get_text()),
                                     "Daily": int(cols[6].get_text())
                                     }
