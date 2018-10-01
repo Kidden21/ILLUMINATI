@@ -11,6 +11,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
+<<<<<<< HEAD
 cred = credentials.Certificate("/Users/bebechin/Desktop/ILLUMINATI/fit5120-4aadd-0e23c690ae70.json")
 firebase_admin.initialize_app(cred, {
     "projectId": "fit5120-4aadd",
@@ -18,6 +19,15 @@ firebase_admin.initialize_app(cred, {
 
 db = firestore.client()
 docs = db.collection(u"B14BatuKurau").get()
+=======
+cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
+firebase_admin.initialize_app(cred, {
+    "projectId": "fit5120-fb6c5",
+    })
+
+db = firestore.client()
+docs = db.collection(u"Parit").get()
+>>>>>>> 8b71ee6134c43ad44ef023a901b0a120e19111ed
 date = []
 water_level = []
 for doc in docs:
@@ -36,6 +46,7 @@ dg = df.groupby(pd.Grouper(key="date", freq="1M")).sum()
 dg.index = dg.index.strftime("%B")
 
 
+<<<<<<< HEAD
 month = ["January", "February", "March", "April", "May", "June",
          "July", "August", "September", "October", "November", "December"]
 
@@ -46,6 +57,13 @@ print(len(dg))
 
 
 
+=======
+print(dg.iloc[0]["water_level"])
+
+
+month = ["January", "February", "March", "April", "May", "June",
+         "July", "August", "September", "October", "November", "December"]
+>>>>>>> 8b71ee6134c43ad44ef023a901b0a120e19111ed
 
 ##label = ['Adventure', 'Action', 'Drama', 'Comedy', 'Thriller/Suspense', 'Horror', 'Romantic Comedy', 'Musical',
 ##         'Documentary', 'Black Comedy', 'Western', 'Concert/Performance', 'Multiple Genres', 'Reality']
