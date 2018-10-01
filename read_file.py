@@ -31,19 +31,19 @@ def check_duplicate(datetime, item_list):
             return True
     return False
         
-cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
+cred = credentials.Certificate("/Users/bebechin/Desktop/ILLUMINATI/fit5120-4aadd-0e23c690ae70.json")
 firebase_admin.initialize_app(cred, {
-    "projectId": "fit5120-fb6c5",
+    "projectId": "fit5120-4aadd",
     })
 
 db = firestore.client()
 
-for folder in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir")[1:]:
-    for year in os.listdir(r"/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder)[1:]:
+for folder in os.listdir("/Users/bebechin/Desktop/ILLUMINATI/PublicInfoBanjir")[1:]:
+    for year in os.listdir(r"/Users/bebechin/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder)[1:]:
         counter = 1
         data = []
-        for filename in os.listdir(r"/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder + "/" + year)[1:]:
-            html_file = codecs.open(r"/Users/Kidden/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder + "/" + year + "/" + filename, "r")
+        for filename in os.listdir(r"/Users/bebechin/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder + "/" + year)[1:]:
+            html_file = codecs.open(r"/Users/bebechin/Desktop/ILLUMINATI/PublicInfoBanjir/" + folder + "/" + year + "/" + filename, "r")
             soup = BeautifulSoup(html_file, "lxml")
             table = soup.find("table")
             rows = table.find_all("tr")[1:]
