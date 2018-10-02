@@ -11,50 +11,13 @@ from firebase_admin import firestore
 from pyfcm import FCMNotification
 import math
 
-def degreetoRadian(degrees):
-    return degrees * math.pi / 180
-
-def distance(x1, y1, x2, y2):
-    earthradiusKM = 6371
-    x = degreetoRadian(x1-x2)
-    y = degreetoRadian(y1-y2)
-
-    X = degreetoRadian(x)
-    Y = degreetoRadian(y)
-
-    a = math.sin(x/2) * math.sin(x/2) + math.sin(y/2) * math.sin(y/2) * math.cos(X) * math.cos(Y)
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1-a))
-    return earthradiusKM * c
-
-def grab_token():
-    db = firestore.client()
-    docs = db.collection(u"devices").where(u"userId", u"==", u"testUser").get()
-    tokens = []
-    for doc in docs:
-        data = doc.to_dict()
-        tokens.append(data["token"])
-    return tokens
-
-def calculation(wL1, wL2, t1, t2):
-    wL = abs(int(wL1) - int(wL2))
-    t1 = datetime.strptime(t1, "%H:%M")
-    t2 = datetime.strptime(t2, "%H:%M")
-    t = (t2 - t1)
-    t = (t.seconds//60)
-    result = truediv(wL, t)
-    return round(result, 2)
-
 cred = credentials.Certificate("/Users/Kidden/Desktop/ILLUMINATI/fit5120-ddc5582972f2.json")
 firebase_admin.initialize_app(cred, {
     "projectId": "fit5120-fb6c5",
     })
 
-push_service = FCMNotification(api_key="AAAASPxj3ek:APA91bHtLxwS4_xgg1dekD-X0-3y9kwygL3sYy9-b9Y1uMmHpcNWoB7c2fkRqDmH6_zcmh7GiKBYQXSplv5kl7LK0egAkpKYH1Cfag8LaJaq9FRu1CvcB7NH6fa-xMK0ywGpH239IGxWG5gg1ZPXVBRJ_y6w29tdIw")
-
-tokens = grab_token()
-
 alert_system_list = [
-                     {"StationName": "SungaiSlim", "AlertLevel": 2700, "WarningLevel": 2730,"DangerLevel": 2800, "Latitude": 3.826389, "Longitude": 101.411111, "Population_Score": 1},
+                     {"StationName": "SungaiSlim", "AlertLevel": 2100, "WarningLevel": 2200,"DangerLevel": 2300, "Latitude": 3.826389, "Longitude": 101.411111, "Population_Score": 1},
                      {"StationName": "PasangApi_BaganDatok", "AlertLevel": 300, "WarningLevel": 330,"DangerLevel": 400, "Latitude": 3.988158, "Longitude": 100.765469, "Population_Score": 1},
                      {"StationName": "TasikBanding", "AlertLevel": 24700, "WarningLevel": 24769,"DangerLevel": 24838, "Latitude": 5.550586, "Longitude": 101.352733, "Population_Score": 1},
                      {"StationName": "BukitMerah", "AlertLevel": 900, "WarningLevel": 904,"DangerLevel": 914, "Latitude": 5.0183, "Longitude": 100.652778, "Population_Score": 1},
@@ -96,6 +59,15 @@ alert_system_list = [
                      {"StationName": "UluSlim", "AlertLevel": None, "WarningLevel": None,"DangerLevel": None, "Latitude": 3.865642, "Longitude": 101.448064, "Population_Score": 1}
                      ]
 
+def calculation(wL1, wL2, t1, t2):
+    wL = abs(int(wL1) - int(wL2))
+    t1 = datetime.strptime(t1, "%H:%M")
+    t2 = datetime.strptime(t2, "%H:%M")
+    t = (t2 - t1)
+    t = (t.seconds//60)
+    result = truediv(wL, t)
+    return round(result, 2)
+
 for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
     html_file = codecs.open(r"/Users/Kidden/Desktop/ILLUMINATI/LatestData/" + item, "r")
     soup = BeautifulSoup(html_file, "lxml")
@@ -103,7 +75,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
     rows = table.find_all("tr")[1:]
     before = True
     water_level = []
-    count = 0
+    count = 0 
     
     for row in rows:
         cols = row.find_all("td")
@@ -122,29 +94,19 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
 
         if alert == None or warning == None or danger == None:
             break
-
+        
         if int(cols[4].get_text()) <= alert:
             score = 1
             multiplier = False
-            
         elif int(cols[4].get_text()) >= alert and int(cols[4].get_text()) <= danger:
             score = 2
             multiplier = False
-            if int(cols[4].get_text()) >= warning:
-                message_title = str(station_name) + ": Warning Level"
-                message_body = "The current water level is in level 2 (WARNING) with a water level of " + str(cols[4].get_text())
-            if int(cols[4].get_text()) >= alert:
-                message_title = str(station_name) + ": Alert Level"
-                message_body = "The current water level is in level 1 (ALERT) with a water level of " + str(cols[4].get_text())
-            for token in tokens:
-                result = push_service.notify_single_device(registration_id=token, message_title=message_title, message_body=message_body)
-                
         elif int(cols[4].get_text()) >= danger:
             score = 3
             multiplier = True
 
             water_level.append([cols[3].get_text(), cols[4].get_text()])
-
+            #print(water_level)
             if len(water_level) == 2:
                 if water_level[0][1] == water_level[1][1]:
                     print("Water Level remains unchanged in this 15 minutes")
@@ -163,12 +125,8 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
 
             if count >= 5:
                 print("FLOOD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
-            
-            for token in tokens:
-                message_title = str(station_name) + ": Danger Level" 
-                message_body = "The current water level is in level 3 (DANGER) with a water level of " + str(cols[4].get_text())
-                result = push_service.notify_single_device(registration_id=token, message_title=message_title, message_body=message_body)
 
+'''
         if multiplier:
             final_score = score * population
             if final_score == 3 or final_score == 6:
@@ -177,42 +135,9 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
                 print("Loss of property is medium, Injury and death casualties may present, proper flood relief centre may required")
             elif final_score == 12 or final_score == 15:
                 print("Loss of property is high, injury and death casualties present, huge and big facility for flood relief centre")
-
-
-
-    
-
-'''            
-        if int(cols[4].get_text()) >= danger:
-##            for token in tokens:
-##                registration_id = token
-##                message_title = str(station_name) + ": Danger Level" 
-##                message_body = "The current water level is in level 3 (DANGER) with a water level of " + str(cols[4].get_text())
-##                result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
-            message_title = str(station_name) + ": Danger Level" 
-            message_body = "The current water level is in level 3 (DANGER) with a water level of " + str(cols[4].get_text())
-##            result = push_service.notify_multiple_device(registration_id=tokens, message_title=message_title, message_body=message_body)
-        elif int(cols[4].get_text()) >= warning:
-##            for token in tokens:
-##                registration_id = token
-##                message_title = str(station_name) + ": Warning Level"
-##                message_body = "The current water level is in level 2 (WARNING) with a water level of " + str(cols[4].get_text())
-##                result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
-            message_title = str(station_name) + ": Warning Level"
-            message_body = "The current water level is in level 2 (WARNING) with a water level of " + str(cols[4].get_text())
-##            result = push_service.notify_multiple_device(registration_id=tokens, message_title=message_title, message_body=message_body)
-        elif int(cols[4].get_text()) >= alert:
-##            for token in tokens:
-##                registration_id = token
-##                message_title = str(station_name) + ": Alert Level"
-##                message_body = "The current water level is in level 1 (ALERT) with a water level of " + str(cols[4].get_text())
-##                result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
-            message_title = str(station_name) + ": Alert Level"
-            message_body = "The current water level is in level 1 (ALERT) with a water level of " + str(cols[4].get_text())
-##            result = push_service.notify_multiple_device(registration_id=tokens, message_title=message_title, message_body=message_body)
-        for token in tokens:
-            result = push_service.notify_single_device(registration_id=registration_id, message_title=message_title, message_body=message_body)
 '''
 
-        
+
+                
+
         
