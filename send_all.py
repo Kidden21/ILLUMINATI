@@ -4,7 +4,7 @@ import codecs
 from bs4 import BeautifulSoup
 import urllib2
 import firebase_admin
-from datetime import datetime
+from datetime import datetime, date, time
 from operator import truediv
 from firebase_admin import credentials
 from firebase_admin import firestore
@@ -100,12 +100,13 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
     html_file = codecs.open(r"/Users/Kidden/Desktop/ILLUMINATI/LatestData/" + item, "r")
     soup = BeautifulSoup(html_file, "lxml")
     table = soup.find("table")
-    rows = table.find_all("tr")[1:]
+    rows = table.find_all("tr")[-1]
     before = True
     water_level = []
     count = 0
-    
+
     for row in rows:
+        
         cols = row.find_all("td")
 
         station_name = cols[1].get_text()
