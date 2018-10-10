@@ -158,7 +158,6 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
         if len(water_level) == 2:
             if water_level[0][1] == water_level[1][1]:
                 count = 0
-                message = str("Water Level remains unchanged in this 15 minutes")
                 status = str("green")
                 doc_ref = db.collection("data_analysis").document(station_name)
                 doc_ref.set({
@@ -166,8 +165,9 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
                     "Date": col[2].get_text(),
                     "Time": cols[3].get_text(),
                     "Increment": 0,
-                    "Message": message,
-                    "Flood_Status": status,
+                    "Message": u"Water Level remains unchanged in this 15 minutes",
+                    "Flood_Status": u"Normal",
+                    "Population_Score": population,
                     "Flood_Severity": 1,
                     "count": count
                     })
@@ -175,16 +175,15 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
             elif water_level[0][1] > water_level[1][1]:
                 level_per_min = calculation(water_level[0][1], water_level[1][1], water_level[0][0], water_level[1][0])
                 count = 0
-                message = str("Water Level decreasing at a rate " + str(level_per_min) + " cm/min")
-                status = str("yellow")
                 doc_ref = db.collection("data_analysis").document(station_name)
                 doc_ref.set({
                     "Location": station_name,
                     "Date": col[2].get_text(),
                     "Time": cols[3].get_text(),
                     "Increment": level_per_min,
-                    "Message": message,
-                    "Flood_Status": status,
+                    "Message": u"Water Level decreasing at a rate " + str(level_per_min) + " cm/min",
+                    "Flood_Status": u"Normal",
+                    "Population_Score": population,
                     "Flood_Severity": 2,
                     "count": count
                     })
@@ -192,23 +191,33 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
             elif water_level[0][1] < water_level[1][1]:
                 level_per_min = calculation(water_level[0][1], water_level[1][1], water_level[0][0], water_level[1][0])
                 count += 1
-                message = str("Water Level increasing at a rate " + str(level_per_min) + " cm/min")
-                status = str("red")
                 doc_ref = db.collection("data_analysis").document(station_name)
                 doc_ref.set({
                     "Location": station_name,
                     "Date": col[2].get_text(),
                     "Time": cols[3].get_text(),
                     "Increment": level_per_min,
-                    "Message": message,
-                    "Flood_Status": status,
+                    "Message": u"Water Level increasing at a rate " + str(level_per_min) + " cm/min",
+                    "Flood_Status": u"Warning",
+                    "Population_Score": population,
                     "Flood_Severity": 3,
                     "count": count
                     })          
 
 
         if count >= 5:
-            print("FLOOD!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
+            doc_ref = db.collection("data_analysis").document(station_name)
+            doc_ref.set({
+                "Location": station_name,
+                "Date": col[2].get_text(),
+                "Time": cols[3].get_text(),
+                "Increment": level_per_min,
+                "Message": u"Flood might exist!!!",
+                "Flood_Status": u"Danger",
+                "Population_Score": population,
+                "Flood_Severity": 3,
+                "count": count
+                }) 
         
         for token in tokens:
             message_title = str(station_name) + ": Danger Level" 
