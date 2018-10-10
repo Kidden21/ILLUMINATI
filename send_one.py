@@ -143,7 +143,14 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
     elif int(col[4].get_text()) >= danger:
         score = 3
         multiplier = True
-
+        if  multiplier:
+            final_score = score * population
+            if final_score == 3 or final_score == 6:
+                print("Loss of Property less, injury may present, few setup of flood relief centre")
+            elif final_score == 9:
+                print("Loss of property is medium, Injury and death casualties may present, proper flood relief centre may required")
+            elif final_score == 12 or final_score == 15:
+                print("Loss of property is high, injury and death casualties present, huge and big facility for flood relief centre")
         for item in rows:
             cols = item.find_all("td")
             
@@ -169,6 +176,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
                     "Flood_Status": u"Normal",
                     "Population_Score": population,
                     "Flood_Severity": 1,
+                    "Flood_Risk_Score": final_score,
                     "count": count
                     })
                 
@@ -185,6 +193,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
                     "Flood_Status": u"Normal",
                     "Population_Score": population,
                     "Flood_Severity": 2,
+                    "Flood_Risk_Score": final_score,
                     "count": count
                     })
 
@@ -201,6 +210,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
                     "Flood_Status": u"Warning",
                     "Population_Score": population,
                     "Flood_Severity": 3,
+                    "Flood_Risk_Score": final_score,
                     "count": count
                     })          
 
@@ -216,6 +226,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
                 "Flood_Status": u"Danger",
                 "Population_Score": population,
                 "Flood_Severity": 3,
+                "Flood_Risk_Score": final_score,
                 "count": count
                 }) 
         
@@ -223,7 +234,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
             message_title = str(station_name) + ": Danger Level" 
             message_body = "The current water level is in level 3 (DANGER) with a water level of " + str(col[4].get_text())
             result = push_service.notify_single_device(registration_id=token, message_title=message_title, message_body=message_body)
-
+'''
     if multiplier:
         final_score = score * population
         if final_score == 3 or final_score == 6:
@@ -232,7 +243,7 @@ for item in os.listdir("/Users/Kidden/Desktop/ILLUMINATI/LatestData")[1:]:
             print("Loss of property is medium, Injury and death casualties may present, proper flood relief centre may required")
         elif final_score == 12 or final_score == 15:
             print("Loss of property is high, injury and death casualties present, huge and big facility for flood relief centre")
-
+'''
 
         
         
