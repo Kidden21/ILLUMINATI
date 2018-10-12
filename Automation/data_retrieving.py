@@ -1,17 +1,11 @@
 ﻿import os
 import selenium
 from selenium import webdriver
-from selenium.webdriver.support.select import Select
 from selenium.common.exceptions import WebDriverException
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.common.exceptions import TimeoutException
 from bs4 import BeautifulSoup
 import datetime
 import calendar
-import firebase_admin
-from firebase_admin import credentials
-from firebase_admin import firestore
+
 
 '''
 value = 149 = B14BatuKurau
@@ -156,33 +150,6 @@ while True:
             print("Please enter a valid command.")
     except SyntaxError, NameError:
         print("Please enter a valid command.")
-
-##day = ['1', '8', '15', '22', '28']
-##month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
-##year = ['2016 ', '2017 ', '2018 ']
-
-##for location_item in location:
-##    driver.find_element_by_xpath("//option[@value='"+location_item+"']").click()
-##    for year_item in year:
-##        driver.find_element_by_xpath("//select[@name='startyear']/option[text()='"+year_item+"']").click()
-##        #driver.find_element_by_xpath("//select[@name='startyear']/option[text()='2012 ']").click()
-##        for month_item in month:
-##            driver.find_element_by_xpath("//select[@name='startmonth']/option[text()='"+month_item+"']").click()
-##            #driver.find_element_by_xpath("//select[@name='startmonth']/option[text()='November']").click()
-##            for day_item in day:
-##                driver.find_element_by_xpath("//select[@name='startday']/option[text()='"+day_item+"']").click()
-##                #driver.find_element_by_xpath("//select[@name='startday']/option[text()='22']").click()
-##                
-##                driver.find_element_by_xpath("//input[@value='Search']").click()
-##                
-##                excel_button = driver.find_element_by_tag_name("area")
-##                
-##                try:
-##                    excel_button.click()
-##                except WebDriverException:
-##                    pass
-##                driver.find_element_by_xpath("//strong[text()=':Return to Previous Page']").click()               
-
 
 
 
