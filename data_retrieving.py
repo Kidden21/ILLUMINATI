@@ -2,7 +2,6 @@
 import selenium
 from selenium import webdriver
 from selenium.common.exceptions import WebDriverException
-from bs4 import BeautifulSoup
 import datetime
 import calendar
 
@@ -111,7 +110,7 @@ while True:
         menu()
         answer = int(input("You want to start download? If yes, please enter 1. "))
         if answer == 1:
-            chrome_driver_path = "/Users/Kidden/Desktop/ILLUMINATI/Automation/chromedriver"
+            chrome_driver_path = "/Users/Kidden/Desktop/ILLUMINATI/chromedriver"
             os.environ["webdriver.chrome.driver"] = chrome_driver_path
             driver = webdriver.Chrome(chrome_driver_path)
             driver.implicitly_wait(30)

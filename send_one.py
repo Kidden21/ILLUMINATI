@@ -1,11 +1,9 @@
 import os
-import sys
 import codecs
 from bs4 import BeautifulSoup
-import urllib2
-import firebase_admin
 from datetime import datetime, date, time
 from operator import truediv
+import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
 from pyfcm import FCMNotification

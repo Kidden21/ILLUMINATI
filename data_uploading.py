@@ -1,7 +1,6 @@
 import os
 import codecs
 from bs4 import BeautifulSoup
-import urllib2
 import firebase_admin
 from firebase_admin import credentials
 from firebase_admin import firestore
