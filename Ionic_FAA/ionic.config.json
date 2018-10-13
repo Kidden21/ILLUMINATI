@@ -1,0 +1,8 @@
+{
+  "name": "FAA",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "ionic-angular",
+  "pro_id": "e8e7cb1d"
+}

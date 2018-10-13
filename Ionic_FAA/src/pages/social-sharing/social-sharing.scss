@@ -1,0 +1,52 @@
+page-social-sharing {
+  .bg-image {
+     background-image: url('../assets/imgs/SocialMediaBackground.png');
+     background-repeat: no-repeat;
+     background-position: center;
+     background-size: cover;
+  }
+  ion-content .scroll-content{
+    overflow-y: auto; // or "overflow: auto;"
+  }
+  .photo-button {
+    background-image: url('../assets/imgs/ActionButton.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: auto;
+    height:80px;
+    width:100%;
+    margin-top:20px;
+    border:solid white;
+    font-size:20px;
+    font-weight:600;
+  }
+  .social-button {
+    height:65px;
+    width:100%;
+    margin-top:20px;
+  }
+  #socialButton1 {
+    background-image: url('../assets/imgs/WhatsappButton.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  #socialButton2 {
+    background-image: url('../assets/imgs/FacebookButton.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  #socialButton3 {
+    background-image: url('../assets/imgs/TwitterButton.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+  #socialButton4 {
+    background-image: url('../assets/imgs/InstagramButton.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+}

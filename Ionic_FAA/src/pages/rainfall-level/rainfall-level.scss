@@ -1,0 +1,14 @@
+page-rainfall-level {
+  .bg-image {
+     background-image: url('../assets/imgs/DataBackground.png');
+     background-repeat: no-repeat;
+     background-position: center;
+     background-size: cover;
+  }
+  ion-content .scroll-content{
+    overflow-y: auto; // or "overflow: auto;"
+  }
+  ion-header ion-icon.back-button-icon.icon {
+    color: map-get($colors, white);
+  }
+}
